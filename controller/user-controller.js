@@ -18,7 +18,7 @@ module.exports = {
 
 	addUser: function (req, res) {
 
-		db.User.create(req.body)
+		db.User.create(req.body, { username: req.body.username })
 			.then(dbuser => {
 				res.json(dbuser);
 			})

@@ -17,15 +17,15 @@ require("./config/passport")(passport); // pass passport for configuration
 app.use(flash()); 
 app.use(morgan('dev')); 
 app.use(cookieParser()); 
-app.use(session({ secret: 'venividivenvi' }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({ secret: 'venividivenvi' }));
 app.use(passport.initialize());
 app.use(passport.session()); 
-app.use(express.json());
 
 //Using CORS for heroku
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://venvi-passport2.herokuapp.com/');
+  res.header('Access-Control-Allow-Origin', 'https://venvi-be.herokuapp.com/');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');

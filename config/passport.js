@@ -27,7 +27,7 @@ module.exports = function(passport) {
     callbackURL: configAuth.googleAuth.callbackURL
   }, function(token, refreshToken, profile, done) {
     process.nextTick(function() {
-      console.log("USER's PROFILE ID", profile, "STRINGIFIED: ", JSON.stringify(profile), "KEYS: ", Object.keys(profile));
+      console.log("USER's PROFILE ID", profile.id);
       
       db.User.findOne({ where: {profileID: profile.id}}).then((user, err) => {
         if (err) return done(err);
@@ -36,8 +36,10 @@ module.exports = function(passport) {
         else {
           console.log("CREATING NEW USER: ", user);
           db.User.create({
-            name: profile.displayName,
-            email: profile.emails[0].value,
+            name: "NewName",
+            username: "NewUsername",
+            password: "NoPassword",
+            email: "sr@gmail.com",
             profileID: profile.id
           }).then((newUser) => {
             if (!newUser) {
@@ -47,6 +49,17 @@ module.exports = function(passport) {
             console.log("RETURNING NEW USER");
             return done(null, newUser)
           })
+          // var newUser = new db.User();
+
+          // newUser.google.id    = profile.id;
+          // newUser.google.token = token;
+          // newUser.google.name  = profile.displayName;
+          // newUser.google.email = profile.emails[0].value; // pull the first email
+
+          // newUser.save(function(err) {
+          //   if (err) throw err;
+          //   return done(null, newUser);
+          // });
         }
       });
     });
