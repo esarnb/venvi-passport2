@@ -11,7 +11,7 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
-require("./config/passport")(passport); // pass passport for configuration
+require("./config/passport")(passport);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
