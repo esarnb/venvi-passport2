@@ -1,8 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var configAuth = require("./auth");
 var db = require("../models");
-var config = require("../config/config.json")
-require("dotenv").config();
 
 module.exports = function(passport) {
   
@@ -24,9 +22,9 @@ module.exports = function(passport) {
 
   //Google Strategy
   passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: (config.heroku.baseurl+"/auth/google/callback")
+    clientID: configAuth.googleAuth.clientID,
+    clientSecret: configAuth.googleAuth.clientSecret,
+    callbackURL: configAuth.googleAuth.callbackURL
   }, function(token, refreshToken, profile, done) {
     process.nextTick(function() {
       console.log("USER's PROFILE ID", profile, "STRINGIFIED: ", JSON.stringify(profile), "KEYS: ", Object.keys(profile));
