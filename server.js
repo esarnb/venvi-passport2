@@ -11,18 +11,27 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
-//Initialize passport.js from config
+require("./config/passport")(passport); // pass passport for configuration
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(session({
+  key: 'user_sid',
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: false,
+  cookie: {
+      expires: 21600000, // 6 HRS
+      httpOnly: false
+  }
+}));
 
 app.use(flash()); 
 app.use(morgan('dev')); 
 app.use(cookieParser()); 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: 'venividivenvi' }));
 app.use(passport.initialize());
 app.use(passport.session()); 
-
-require("./config/passport")(passport); // pass passport for configuration
 
 //Using CORS for heroku
 app.use((req, res, next) => {
