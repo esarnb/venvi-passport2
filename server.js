@@ -10,7 +10,6 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-var config = require("./config/config.json");
 
 //Initialize passport.js from config
 require("./config/passport")(passport); // pass passport for configuration
@@ -26,7 +25,7 @@ app.use(express.json());
 
 //Using CORS for heroku
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', config.heroku.baseurl);
+  res.header('Access-Control-Allow-Origin', 'https://venvi-passport2.herokuapp.com/');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');

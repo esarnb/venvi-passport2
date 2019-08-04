@@ -18,8 +18,5 @@
   "production": {
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
-  },
-  "heroku": {
-    "baseurl": "https://venvi-passport2.herokuapp.com/"
   }
 }
