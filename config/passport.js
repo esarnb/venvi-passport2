@@ -33,7 +33,7 @@ module.exports = function(passport) {
       db.User.findOne({ where: {profileID: profile.id}}).then((user, err) => {
         if (err) return done(err);
         
-        if (user) return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
+        if (user) return done(null, false)
         else {
           //console.log("CREATING NEW USER: ", user);
           db.User.create({
