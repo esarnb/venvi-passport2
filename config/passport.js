@@ -37,10 +37,10 @@ module.exports = function(passport) {
         else {
           //console.log("CREATING NEW USER: ", user);
           db.User.create({
-            name: "NewName",
-            username: "NewUsername",
-            password: "NoPassword",
-            email: "sr@gmail.com",
+            name: profile.name.givenName,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            photo: profile.photos[0].value,
             profileID: profile.id
           })
           .then((dbUser) => {
