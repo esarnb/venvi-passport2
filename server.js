@@ -12,7 +12,6 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
 //Initialize passport.js from config
-require("./config/passport")(passport); // pass passport for configuration
 
 app.use(flash()); 
 app.use(morgan('dev')); 
@@ -22,6 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'venividivenvi' }));
 app.use(passport.initialize());
 app.use(passport.session()); 
+
+require("./config/passport")(passport); // pass passport for configuration
 
 //Using CORS for heroku
 app.use((req, res, next) => {
