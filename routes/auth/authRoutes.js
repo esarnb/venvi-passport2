@@ -8,9 +8,13 @@ const authController = require("../../controller/user-controller");
 // })
 
 //Then the user redirects to youtube
-router.route("/").get(
-  
+router.route("/").get(function(req, res) {
+
   req.app.get('passport').authenticate('google', { scope: ["profile", "email"] })
+
+
+}
+  
 )
 
 //Once the user is verified, return to site
