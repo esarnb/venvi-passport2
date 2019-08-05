@@ -18,7 +18,9 @@ router.route("/").get(function(req, res) {
 )
 
 //Once the user is verified, return to site
-router.route("/callback").get(req.app.get('passport').authenticate('google', { successRedirect: '/auth/google/profile', failureRedirect: '/', failureFlash: 'Invalid login' }))
+router.route("/callback").get(function(req, res) {
+  req.app.get('passport').authenticate('google', { successRedirect: '/auth/google/profile', failureRedirect: '/', failureFlash: 'Invalid login' })
+})
 
 //Redirect the user to their profile page
 router.route("/profile").get(isLoggedIn, authController.profile);
