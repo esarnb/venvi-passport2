@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
         len: [1]
       }
     },
-    photo: {
+    profilePhoto: {
       type: DataTypes.STRING,
       // allowNull: false,
       validate: {
