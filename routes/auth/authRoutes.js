@@ -10,12 +10,17 @@ router.route("/login").get( (req, res) => {
 
 //Then the user redirects to youtube
 router.route("/").get((req,res,next)=>{
+  console.log("MAIN ROUTE REQ: ", req);
+  console.log("MAIN ROUTE RES: ", res);
+  console.log("MAIN ROUTE NEXT: ", next);
+  
   passport.authenticate('google', { scope: ["profile", "email"] })(req,res,next)
 })
 
 //Once the user is verified, return to site
 router.route("/callback").get((req,res,next)=>{
   passport.authenticate('google', { successRedirect: '/auth/google/profile', failureRedirect: '/', failureFlash: 'Invalid login' })(req, res, next)
+  res.redirect('/profile');
 })
 
 //Redirect the user to their profile page
