@@ -29,6 +29,14 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
+
+     rating: {
+      type: DataTypes.INTEGER,
+      // allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
 },
    {
   freezeTableName: true,
@@ -40,6 +48,11 @@ module.exports = function(sequelize, DataTypes) {
     Vehicle.hasMany(models.Review, {
       onDelete: "cascade"
     });
+
+    // Vehicle.hasMany(models.Listing, {
+    //   onDelete: "cascade"
+    // });
+
   };
 
   return Vehicle;
